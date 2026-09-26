@@ -37,4 +37,4 @@ Do not submit:
 
 The goal is not to make the protocol look perfect.
 
-The goal is to make long-running AI-assisted engineering work safer and easier to resume.
+The goal is to make long-running AI-assisted IT and technical work safer and easier to resume.
