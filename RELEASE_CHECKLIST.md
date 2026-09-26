@@ -146,3 +146,11 @@ Share the existing DEV article thoughtfully in a relevant community, following i
 - Do not reopen logo or cover design unless a genuine problem is found.
 - Do not disclose employer-specific technical details in public outreach.
 - Do not claim social posts, domain purchases or external publicity have happened without evidence.
+
+## Reddit outreach checkpoint — 2026-09-26
+
+- User screenshot confirms a published top-level comment under `u/kwadolia` in r/ChatGPTCoding's Weekly Self Promotion Thread: https://www.reddit.com/r/ChatGPTCoding/comments/1wm6cbp/weekly_self_promotion_thread/
+- The visible comment describes the project, REHYDRATE / STATUS / CHECKPOINT, audience, ChatGPT provenance, Caelvrix affiliation, MIT preview, GitHub link and request for feedback.
+- Notepad was used as a paste intermediary after the Reddit editor initially truncated a paste.
+- Direct comment permalink remains to be captured. The thread link is not a direct comment link.
+- This checkpoint supersedes the earlier action to submit the first Reddit comment. Avoid duplicate posts.
