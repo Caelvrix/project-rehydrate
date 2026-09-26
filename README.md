@@ -1,10 +1,12 @@
 # Project Rehydrate
 
-**A continuity protocol for long-running AI-assisted engineering work.**
+**A continuity protocol for long-running AI-assisted IT and technical work.**
 
 Project Rehydrate exists for a simple reason: long technical projects outlive individual chat sessions, browser tabs, model context windows, and human memory.
 
 The protocol externalizes project state into a small set of canonical files so that an AI assistant and a human operator can reliably resume work without guessing what happened before.
+
+Project Rehydrate is designed to be **vendor-neutral and AI-platform agnostic**. It was developed and field-tested primarily with ChatGPT, but the protocol itself does not depend on ChatGPT-specific memory or tooling.
 
 ## Why it exists
 
@@ -19,7 +21,7 @@ Long-running AI-assisted projects often fail in predictable ways:
 - missing history gets reconstructed instead of reloaded;
 - destructive work can resume from an incorrect assumption.
 
-Project Rehydrate treats continuity as an engineering problem, not a memory feature.
+Project Rehydrate treats continuity as an operational problem, not a memory feature.
 
 ## Core idea
 
@@ -71,6 +73,25 @@ Project Rehydrate is not just a handoff note. It introduces explicit operating r
 9. Treat AI memory as helpful context, never as the sole source of truth.
 10. Human verification remains mandatory before destructive or production changes.
 
+## Who this is for
+
+Project Rehydrate is intended for any long-running AI-assisted IT or technical work where continuity matters, including:
+
+- systems administration;
+- infrastructure and networking;
+- cybersecurity;
+- cloud operations;
+- databases;
+- data and analytics;
+- software development;
+- ERP and business systems;
+- reporting and BI;
+- IT governance;
+- incident response;
+- architecture;
+- technical support;
+- research and troubleshooting.
+
 ## Start here
 
 - [Quickstart](QUICKSTART.md) — smallest useful implementation
@@ -78,8 +99,11 @@ Project Rehydrate is not just a handoff note. It introduces explicit operating r
 - [Reference Card](REFERENCE_CARD.md) — short day-to-day version
 - [Checkpointing](CHECKPOINTING.md) — verified persistence workflow
 - [Failure Modes](FAILURE_MODES.md) — how continuity breaks
+- [Field Notes and Growing Pains](FIELD_NOTES_AND_GROWING_PAINS.md) — how the protocol evolved from real failures
 - [Recovery Playbook](RECOVERY_PLAYBOOK.md) — what to do when it already broke
 - [Adoption Guide](ADOPTION_GUIDE.md) — introduce the pattern without creating bureaucracy
+- [AI Platform Compatibility](COMPATIBILITY.md) — how to adapt the protocol across different assistants
+- [Prompt Patterns](PROMPT_PATTERNS.md) — reusable model-neutral prompt examples
 - [FAQ](FAQ.md) — common questions
 - [Examples](examples/) — sanitized sample context files
 - [Roadmap](ROADMAP.md) — planned evolution
@@ -127,7 +151,7 @@ Project Rehydrate does **not** replace:
 - architecture documentation;
 - backups;
 - secrets management;
-- engineering judgment.
+- technical judgment.
 
 It is a continuity layer between those systems and the AI-assisted work happening around them.
 
@@ -151,4 +175,4 @@ Project Rehydrate is available under the [MIT License](LICENSE).
 
 The goal is practical usefulness.
 
-If this saves one engineer from reconstructing hours or days of lost context, it has done its job.
+If this saves one IT professional or technical practitioner from reconstructing hours or days of lost context, it has done its job.
