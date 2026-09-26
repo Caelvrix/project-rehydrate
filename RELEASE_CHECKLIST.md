@@ -82,9 +82,21 @@ With attribution accepted, perform the last manual public-profile / email-hygien
 - [x] Open the repository in GitHub and visually inspect the README rendering (screenshots reviewed; latest diagram edit still merits visual confirmation).
 - [ ] Confirm the Mermaid diagram renders correctly.
 - [x] Confirm all README linked files exist (link targets checked via connector).
-- [ ] Change repository visibility from Private to Public.
+- [x] Change repository visibility from Private to Public (GitHub connector verified PUBLIC on 2026-09-26).
 - [ ] Create a GitHub release/tag for `v0.1-preview` if desired.
 - [ ] Publish the article and community posts after the repository is public.
+
+## Public launch verification — 2026-09-26
+
+- `Caelvrix/project-rehydrate`: PUBLIC, default branch `main` (verified from live GitHub repository metadata).
+- `Caelvrix/community-hub`: PRIVATE (verified separately).
+- Commit attribution to `kwadolia` explicitly accepted by project owner.
+- `v0.1-preview` release/tag: not yet created.
+- External launch articles/posts: not yet published.
+
+### Next exact action
+
+Create the `v0.1-preview` GitHub release using the public repository. Verify its release URL before distributing links.
 
 ## Release principle
 
