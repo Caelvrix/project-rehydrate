@@ -83,7 +83,7 @@ With attribution accepted, perform the last manual public-profile / email-hygien
 - [ ] Confirm the Mermaid diagram renders correctly.
 - [x] Confirm all README linked files exist (link targets checked via connector).
 - [x] Change repository visibility from Private to Public (GitHub connector verified PUBLIC on 2026-09-26).
-- [ ] Create a GitHub release/tag for `v0.1-preview` if desired.
+- [x] Create a GitHub release/tag for `v0.1-preview` (verified published pre-release).
 - [ ] Publish the article and community posts after the repository is public.
 
 ## Public launch verification — 2026-09-26
@@ -91,12 +91,12 @@ With attribution accepted, perform the last manual public-profile / email-hygien
 - `Caelvrix/project-rehydrate`: PUBLIC, default branch `main` (verified from live GitHub repository metadata).
 - `Caelvrix/community-hub`: PRIVATE (verified separately).
 - Commit attribution to `kwadolia` explicitly accepted by project owner.
-- `v0.1-preview` release/tag: not yet created.
+- `v0.1-preview` release/tag: PUBLISHED and independently verified. Release URL: https://github.com/Caelvrix/project-rehydrate/releases/tag/v0.1-preview . GitHub release ID: 397169707; `prerelease=true`, `draft=false`, target `main`.
 - External launch articles/posts: not yet published.
 
 ### Next exact action
 
-Create the `v0.1-preview` GitHub release using the public repository. Verify its release URL before distributing links.
+Release verified. Publish the prepared article and community posts thoughtfully, using the canonical release URL. Then return to the Sales Performance POC. Keep the release tag as a fixed snapshot; later checklist updates to `main` do not alter that tag.
 
 ## Release principle
 
