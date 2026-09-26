@@ -56,6 +56,27 @@ This checklist is the final gate before Project Rehydrate becomes public.
 - [x] Reddit launch copy drafted.
 - [x] Hacker News launch copy drafted.
 
+## Verified pre-publication checkpoint — 2026-09-26
+
+- Organization handle: `Caelvrix` (renamed from the former organization handle).
+- Repository: `Caelvrix/project-rehydrate`, default branch `main`.
+- Visibility at checkpoint: PRIVATE.
+- Publisher branding: Caelvrix in README, NOTICE, LICENSE, ARTICLE_DRAFT and launch copy.
+- Profile logo: the approved black-and-crimson Caelvrix 2 artwork was shown uploaded in the organization settings screenshot; visual account-level confirmation only.
+- A focused default-branch content search found no obvious legacy branding or internal identifiers, but this is not a full history/secrets audit.
+- **Publication blocker:** existing Git commits are attributed to the owner's personal GitHub account. Organization branding does not anonymize commit metadata. Decide whether public attribution is acceptable before making the repository public.
+- Do not claim a domain, trademark, public social handle, or GitHub release has been created without separate verification.
+
+### Exact next action
+
+Resolve the commit-attribution/privacy decision. Then review Git history and public assets, verify visibility is still private, and only then perform the approved public release.
+
+### Do not do yet
+
+- Do not change repository visibility.
+- Do not publish launch posts or distribute release links.
+- Do not rewrite history without an agreed preservation and validation plan.
+
 ## Final manual actions
 
 - [ ] Open the repository in GitHub and visually inspect the README rendering.
