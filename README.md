@@ -43,6 +43,21 @@ The three operator commands are:
 - **STATUS** — report the current safe state, unresolved items, and exact next action.
 - **CHECKPOINT** — persist a verified milestone back into canonical context.
 
+## What makes it different
+
+Project Rehydrate is not just a handoff note. It introduces explicit operating rules:
+
+- a source-of-truth hierarchy;
+- exact safe-state language;
+- atomic next actions;
+- explicit risk boundaries;
+- stale-instruction supersession;
+- backup-before-mutation;
+- small verified checkpoint writes;
+- read-back validation;
+- integrity hashing after semantic verification;
+- recovery procedures when continuity has already broken.
+
 ## Design principles
 
 1. External state beats conversational memory.
@@ -58,11 +73,63 @@ The three operator commands are:
 
 ## Start here
 
-1. Read [QUICKSTART.md](QUICKSTART.md)
-2. Read [PROTOCOL.md](PROTOCOL.md)
-3. Review [CHECKPOINTING.md](CHECKPOINTING.md)
-4. Review [FAILURE_MODES.md](FAILURE_MODES.md)
-5. Use the sanitized examples in [examples/](examples/)
+- [Quickstart](QUICKSTART.md) — smallest useful implementation
+- [Protocol](PROTOCOL.md) — operating contract
+- [Reference Card](REFERENCE_CARD.md) — short day-to-day version
+- [Checkpointing](CHECKPOINTING.md) — verified persistence workflow
+- [Failure Modes](FAILURE_MODES.md) — how continuity breaks
+- [Recovery Playbook](RECOVERY_PLAYBOOK.md) — what to do when it already broke
+- [Adoption Guide](ADOPTION_GUIDE.md) — introduce the pattern without creating bureaucracy
+- [FAQ](FAQ.md) — common questions
+- [Examples](examples/) — sanitized sample context files
+- [Roadmap](ROADMAP.md) — planned evolution
+- [Governance](GOVERNANCE.md) — how the protocol itself changes
+- [Security & Privacy](SECURITY.md) — information-hygiene guidance
+- [Contributing](CONTRIBUTING.md) — how to help
+
+## Thirty-second version
+
+At the end of a meaningful work session, do not write only what you did.
+
+Record:
+
+```text
+Last verified milestone:
+Current safe state:
+Unresolved:
+Exact next action:
+Do not do yet:
+```
+
+At the start of the next session, reload that state before doing substantial work.
+
+That simple discipline is the seed of Project Rehydrate.
+
+## Example
+
+Instead of:
+
+> Worked on ingestion. Continue tomorrow.
+
+write:
+
+> Read-only source inspection complete. Candidate incremental key validated over three historical windows. No production changes made. Scheduler remains disabled. Next action: run duplicate-key analysis before implementing merge logic.
+
+The second note survives a new chat, a tired operator, a different assistant, and a week away from the project.
+
+## What this is not
+
+Project Rehydrate does **not** replace:
+
+- Git;
+- tickets;
+- runbooks;
+- architecture documentation;
+- backups;
+- secrets management;
+- engineering judgment.
+
+It is a continuity layer between those systems and the AI-assisted work happening around them.
 
 ## Status
 
@@ -71,6 +138,14 @@ The three operator commands are:
 This protocol is intentionally being published early. It has been shaped by repeated real-world continuity failures and recoveries, but it should still be treated as a field-tested working pattern rather than a finished standard.
 
 Feedback, criticism, edge cases, and better patterns are welcome.
+
+## Article draft
+
+A long-form introduction is being prepared in [ARTICLE_DRAFT.md](ARTICLE_DRAFT.md).
+
+## License
+
+Project Rehydrate is available under the [MIT License](LICENSE).
 
 ## Philosophy
 
