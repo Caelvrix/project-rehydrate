@@ -36,15 +36,15 @@ Partly. Marker checks, backups, hashes, and linting can be automated. Decisions 
 
 ## Is this tied to a particular AI provider?
 
-No. The protocol is intentionally model- and vendor-neutral.
+No. The protocol is intentionally model- and vendor-neutral. It was developed and field-tested primarily with ChatGPT, but the continuity layer is external to the AI platform. See [COMPATIBILITY.md](COMPATIBILITY.md) for supported operating modes and portability guidance.
 
 ## Can I rename REHYDRATE, STATUS, and CHECKPOINT?
 
 Yes. The names are conventions, not magic commands. Consistency matters more than terminology.
 
-## What if my project is not software engineering?
+## What if my work is not software engineering?
 
-The pattern can apply anywhere a long-running AI-assisted workflow has state, decisions, unresolved questions, and risk boundaries. Adapt the domain files accordingly.
+That is expected. Project Rehydrate is intended for long-running AI-assisted IT and technical work across infrastructure, networking, security, cloud, databases, data, BI, ERP, support, architecture, software, governance, research, and other technical domains. Adapt the domain files accordingly.
 
 ## Does this replace tickets, Git, runbooks, or architecture docs?
 
