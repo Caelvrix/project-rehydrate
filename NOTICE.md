@@ -1,5 +1,7 @@
 # Notice
 
+Project Rehydrate is published by **Caelvrix**.
+
 Project Rehydrate is published as a practical, vendor-neutral continuity pattern.
 
 The repository contains general methods, examples, documentation, and small command snippets intended for learning and adaptation.
