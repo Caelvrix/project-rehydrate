@@ -64,24 +64,24 @@ This checklist is the final gate before Project Rehydrate becomes public.
 - Publisher branding: Caelvrix in README, NOTICE, LICENSE, ARTICLE_DRAFT and launch copy.
 - Profile logo: the approved black-and-crimson Caelvrix 2 artwork was shown uploaded in the organization settings screenshot; visual account-level confirmation only.
 - A focused default-branch content search found no obvious legacy branding or internal identifiers, but this is not a full history/secrets audit.
-- **Publication blocker:** existing Git commits are attributed to the owner's personal GitHub account. Organization branding does not anonymize commit metadata. Decide whether public attribution is acceptable before making the repository public.
+- **Commit attribution decision RESOLVED:** Kaval explicitly accepts public attribution to `kwadolia`. Keep existing Git history; no anonymization or history rewrite. Profile visibility and commit-email review remain sensible optional hygiene checks, not a requirement to disguise authorship.
 - Do not claim a domain, trademark, public social handle, or GitHub release has been created without separate verification.
 
 ### Exact next action
 
-Resolve the commit-attribution/privacy decision. Then review Git history and public assets, verify visibility is still private, and only then perform the approved public release.
+With attribution accepted, perform the last manual public-profile / email-hygiene check if desired, confirm repository visibility is PRIVATE, then change only `Caelvrix/project-rehydrate` to PUBLIC in GitHub Settings. Keep `Caelvrix/community-hub` PRIVATE. Verify public access before announcing.
 
 ### Do not do yet
 
-- Do not change repository visibility.
-- Do not publish launch posts or distribute release links.
+- Do not publish launch posts or distribute release links until public visibility is independently verified.
+- Do not make `Caelvrix/community-hub` public.
 - Do not rewrite history without an agreed preservation and validation plan.
 
 ## Final manual actions
 
-- [ ] Open the repository in GitHub and visually inspect the README rendering.
+- [x] Open the repository in GitHub and visually inspect the README rendering (screenshots reviewed; latest diagram edit still merits visual confirmation).
 - [ ] Confirm the Mermaid diagram renders correctly.
-- [ ] Confirm all README links open correctly.
+- [x] Confirm all README linked files exist (link targets checked via connector).
 - [ ] Change repository visibility from Private to Public.
 - [ ] Create a GitHub release/tag for `v0.1-preview` if desired.
 - [ ] Publish the article and community posts after the repository is public.
