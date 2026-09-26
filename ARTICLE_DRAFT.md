@@ -1,14 +1,22 @@
-# Your AI Project Forgot Everything. Ours Did Too — So We Built a Continuity Protocol.
+# When Your AI Forgets the Project: How We Built a Continuity Protocol for Long-Running IT Work
 
-Long-running AI-assisted engineering work has a strange failure mode: the project can be perfectly healthy while the conversation holding its history becomes unusable.
+Long-running AI-assisted IT work has a strange failure mode: the project can be perfectly healthy while the conversation holding its history becomes unusable.
 
 You change chats. A context window fills up. A browser session disappears. An assistant remembers the broad idea but not the exact safe state. A stale instruction survives three architecture changes. Someone says, "continue where we left off," and suddenly both human and AI are reconstructing the past from fragments.
 
 We kept running into this problem during real technical work.
 
-Eventually we stopped treating it as an annoyance and started treating it as an engineering problem.
+Eventually we stopped treating it as an annoyance and started treating it as an operational continuity problem.
 
 That became **Project Rehydrate**.
+
+## Why the name?
+
+We use the word *rehydrate* because a new AI session should not have to reconstruct a project from conversational memory.
+
+Instead, the session is reloaded from an external canonical project state: what was last proven, what is safe now, what remains unresolved, what must not be touched, and what exact action comes next.
+
+The name is the shorthand. The problem it solves is simple: **keeping long-running AI-assisted IT work coherent across sessions.**
 
 ## The core observation
 
@@ -21,6 +29,30 @@ A long-running project needs an external continuity layer that is:
 - explicit about what is verified;
 - explicit about what must not be touched;
 - explicit about the exact next safe action.
+
+## This was not invented cleanly
+
+Project Rehydrate grew out of repeated failures.
+
+We tried large handoff summaries. They became hard to audit.
+
+We let old next-actions remain in context. They survived after strategy changed.
+
+We allowed multiple technical workstreams to share too much context. They started bleeding into each other.
+
+We used large checkpoint writes. Some became fragile or difficult to verify.
+
+We trusted successful commands before reading the result back.
+
+We learned that hashing a bad file only gives you a very reliable bad file.
+
+We watched temporary working copies drift beyond the canonical notes.
+
+We saw how easily an AI assistant could reconstruct a plausible history when the real history was incomplete.
+
+Those growing pains became the protocol.
+
+The detailed record is preserved in `FIELD_NOTES_AND_GROWING_PAINS.md` because we believe the failures are as useful as the final pattern.
 
 ## Three commands
 
@@ -48,8 +80,6 @@ This is not just 'write a summary.' A checkpoint is treated as a small controlle
 
 Some of the most useful rules came directly from things going wrong.
 
-Large context dumps were difficult to verify. Stale next actions survived longer than they should have. Temporary working copies drifted away from the canonical state. A successful command was occasionally mistaken for a successful outcome.
-
 So the protocol became intentionally boring:
 
 - plain Markdown;
@@ -60,21 +90,61 @@ So the protocol became intentionally boring:
 - explicit safety boundaries;
 - hashes only after semantic verification.
 
+That boringness is a feature. Boring state is easier to audit.
+
 ## A small example
 
 Instead of writing:
 
- > Worked on ingestion. Continue tomorrow.
+> Worked on ingestion. Continue tomorrow.
 
 write:
 
- > Read-only source inspection complete. Candidate incremental key validated over three historical windows. No production changes made. Scheduler remains disabled. Next action: run duplicate-key analysis before implementing merge logic.
+> Read-only source inspection complete. Candidate incremental key validated over three historical windows. No production changes made. Scheduler remains disabled. Next action: run duplicate-key analysis before implementing merge logic.
 
 That second note can survive a week, a new chat, a different assistant, and a tired human brain.
 
+## Is this only for ChatGPT?
+
+No.
+
+Project Rehydrate was developed and field-tested primarily with ChatGPT, but it was deliberately designed so that the continuity layer lives outside the AI platform.
+
+The protocol can be adapted to any assistant that can read the canonical state and follow explicit instructions.
+
+That may include ChatGPT, Claude, Gemini, Microsoft Copilot, local models, or future assistants.
+
+We are careful about the claim: we are **not** saying every feature has been tested on every AI platform.
+
+We are saying the protocol is vendor-neutral by design.
+
+At the simplest level, a human can paste the relevant canonical state into any capable assistant. At more integrated levels, the assistant may be able to read repositories, shared drives, project folders, or write back checkpoint updates under human review.
+
+## Who is this for?
+
+Not only software engineers.
+
+The pattern is intended for anyone doing long-running AI-assisted technical work:
+
+- sysadmins;
+- network engineers;
+- security teams;
+- database administrators;
+- cloud practitioners;
+- data and BI professionals;
+- developers;
+- ERP administrators;
+- IT managers;
+- architects;
+- support engineers;
+- analysts;
+- technical researchers.
+
+If your work has state, decisions, unresolved questions, risk boundaries, and a next action, continuity matters.
+
 ## What Project Rehydrate is not
 
-It is not a replacement for Git, ticketing, documentation, backups, or engineering judgment.
+It is not a replacement for Git, ticketing, documentation, backups, runbooks, secrets management, or technical judgment.
 
 It is simply the continuity layer between all of those things and the AI conversation helping you work through them.
 
@@ -86,6 +156,6 @@ Someone wrote the forum answer. Someone documented the obscure fix. Someone post
 
 Project Rehydrate is our attempt to put one useful thing back into that commons.
 
-If it saves one engineer from rebuilding hours or days of lost context, it has done its job.
+If it saves one IT professional from rebuilding hours or days of lost context, it has done its job.
 
 Project Rehydrate is being published as a v0.1 preview so that the rough edges can be found in the open.
