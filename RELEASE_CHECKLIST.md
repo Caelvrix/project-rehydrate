@@ -103,3 +103,22 @@ Release verified. Publish the prepared article and community posts thoughtfully,
 Do not wait for perfection.
 
 v0.1 is intentionally a preview. The goal is to expose the protocol to real practitioners and improve it from real feedback.
+
+## DEV publication checkpoint — 2026-09-26
+
+- Publication: the first Caelvrix DEV article, **When Your AI Forgets the Project: How We Built a Continuity Protocol for Long-Running IT Work**.
+- Canonical article URL supplied by Kaval: https://dev.to/caelvrix/when-your-ai-forgets-the-project-how-we-built-a-continuity-protocol-for-long-running-it-work-1l0
+- Evidence: user screenshots show DEV's published article (not the earlier Unpublished Post draft), including the concluding **Try Project Rehydrate** section and its repository, five-minute guide and v0.1 release links. User provided the exact address.
+- Verification limitation: an independent external fetch of the DEV article returned a cache miss; do not claim page content was independently fetched.
+- Status: GitHub repo PUBLIC and v0.1 preview release independently verified earlier. DEV article publication supported by user-provided screenshot and URL.
+- This section supersedes the older snapshot line above that states no external articles were published. That line is preserved solely as its dated historical state.
+
+### Exact next action
+
+Optionally add a Caelvrix cover image through DEV's Edit action, then distribute the published article to a small number of relevant communities using tailored, rule-compliant posts; do not claim submissions have occurred until confirmed. Preserve the article URL, any posts, feedback and resulting next actions in a later checkpoint. Then return to the Sales Performance POC.
+
+### Do not do yet
+
+- Do not change the existing `v0.1-preview` release tag or rewrite Git history.
+- Do not publish any employer-specific infrastructure, data, screenshots or private context.
+- Keep `Caelvrix/community-hub` PRIVATE.
