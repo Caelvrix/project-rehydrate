@@ -122,3 +122,27 @@ Optionally add a Caelvrix cover image through DEV's Edit action, then distribute
 - Do not change the existing `v0.1-preview` release tag or rewrite Git history.
 - Do not publish any employer-specific infrastructure, data, screenshots or private context.
 - Keep `Caelvrix/community-hub` PRIVATE.
+
+## Final DEV cover checkpoint — 2026-09-26
+
+- Kaval supplied a screenshot of the published DEV article displaying its final wide Caelvrix black-and-crimson Project Rehydrate cover above the title.
+- The existing article was edited in place; no replacement post was requested. Its exact canonical URL remains: https://dev.to/caelvrix/when-your-ai-forgets-the-project-how-we-built-a-continuity-protocol-for-long-running-it-work-1l0
+- Visible title and four tags: `ai`, `opensource`, `tutorial`, `productivity`.
+- Publication and final cover are evidenced by the user-provided DEV screenshot; no independent remote screenshot retrieval is claimed.
+- This milestone supersedes the earlier optional cover-image task. No more branding edits are required for launch.
+
+### Current safe state
+
+- Project Rehydrate repository and `v0.1-preview` are public and verified; DEV article is published with approved cover.
+- `Caelvrix/community-hub` remains private per the last verified repository check.
+- The frozen release tag must not be moved to include later documentation edits.
+
+### Exact next action
+
+Share the existing DEV article thoughtfully in a relevant community, following its self-promotion rules and avoiding duplicate mass-posting. Record the actual destination and URL after publication. Then hand off to the internal Sales Performance POC using its own canonical context and REHYDRATE procedure.
+
+### Do not do yet
+
+- Do not reopen logo or cover design unless a genuine problem is found.
+- Do not disclose employer-specific technical details in public outreach.
+- Do not claim social posts, domain purchases or external publicity have happened without evidence.
