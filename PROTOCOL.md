@@ -1,6 +1,6 @@
 # Protocol
 
-Project Rehydrate defines a small operating protocol for preserving continuity across long-running AI-assisted engineering work.
+Project Rehydrate defines a small operating protocol for preserving continuity across long-running AI-assisted IT and technical work.
 
 ## Roles
 
