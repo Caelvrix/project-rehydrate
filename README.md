@@ -6,6 +6,8 @@ Long technical projects outlive chats, context windows, browser sessions, and hu
 
 Project Rehydrate keeps one small external source of truth so a human and an AI assistant can resume work **without guessing where they left off**.
 
+Here, **canonical** simply means the file or record everyone agrees is the current source of truth. **Rehydrate** means loading a fresh AI session from that saved state instead of reconstructing the project from memory.
+
 Developed and field-tested primarily with ChatGPT; designed to be vendor-neutral.
 
 ## The whole idea in 30 seconds
