@@ -1,5 +1,7 @@
 # Project Rehydrate
 
+**by Caelvrix**
+
 **A continuity protocol for long-running AI-assisted IT and technical work.**
 
 Long technical projects outlive chats, context windows, browser sessions, and human memory.
@@ -9,6 +11,8 @@ Project Rehydrate keeps one small external source of truth so a human and an AI 
 Here, **canonical** simply means the file or record everyone agrees is the current source of truth. **Rehydrate** means loading a fresh AI session from that saved state instead of reconstructing the project from memory.
 
 Developed and field-tested primarily with ChatGPT; designed to be vendor-neutral.
+
+Project Rehydrate is published by **Caelvrix**, an independent technical publishing identity focused on practical, reusable systems knowledge.
 
 ## The whole idea in 30 seconds
 
