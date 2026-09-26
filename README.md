@@ -33,11 +33,11 @@ Three commands make the workflow memorable:
 ## The flow
 
 ```mermaid
-flowchart LR
-    A[Work with AI] --> B[Checkpoint verified state]
+flowchart TD
+    A[Work with AI] --> B[CHECKPOINT\nSave verified state]
     B --> C[Canonical project context]
     C --> D[New chat / new day / new assistant]
-    D --> E[REHYDRATE]
+    D --> E[REHYDRATE\nLoad canonical state]
     E --> F[Resume from exact safe state]
     F --> A
 ```
