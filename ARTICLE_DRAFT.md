@@ -8,7 +8,7 @@ We kept running into this during real technical work.
 
 Eventually we stopped treating it as a chat problem and started treating it as a continuity problem.
 
-That became **Project Rehydrate**.
+That became **Project Rehydrate**, published by **Caelvrix**.
 
 ## The idea in one paragraph
 
@@ -156,4 +156,4 @@ Project Rehydrate is one attempt to put something useful back into that commons.
 
 If it saves one IT professional from rebuilding hours or days of lost context, it has done its job.
 
-Project Rehydrate is being published as a **v0.1 preview** so people can test it, break it, improve it, and contribute real failure cases.
+Project Rehydrate is being published by **Caelvrix** as a **v0.1 preview** so people can test it, break it, improve it, and contribute real failure cases.
