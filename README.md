@@ -2,120 +2,15 @@
 
 **A continuity protocol for long-running AI-assisted IT and technical work.**
 
-Project Rehydrate exists for a simple reason: long technical projects outlive individual chat sessions, browser tabs, model context windows, and human memory.
+Long technical projects outlive chats, context windows, browser sessions, and human memory.
 
-The protocol externalizes project state into a small set of canonical files so that an AI assistant and a human operator can reliably resume work without guessing what happened before.
+Project Rehydrate keeps one small external source of truth so a human and an AI assistant can resume work **without guessing where they left off**.
 
-Project Rehydrate is designed to be **vendor-neutral and AI-platform agnostic**. It was developed and field-tested primarily with ChatGPT, but the protocol itself does not depend on ChatGPT-specific memory or tooling.
+Developed and field-tested primarily with ChatGPT; designed to be vendor-neutral.
 
-## Why it exists
+## The whole idea in 30 seconds
 
-Long-running AI-assisted projects often fail in predictable ways:
-
-- decisions are scattered across many conversations;
-- stale instructions survive after the plan changes;
-- the assistant loses the exact safe state of a system;
-- temporary files diverge from the actual project state;
-- later sessions re-discover decisions that were already made;
-- large handoff summaries become difficult to audit;
-- missing history gets reconstructed instead of reloaded;
-- destructive work can resume from an incorrect assumption.
-
-Project Rehydrate treats continuity as an operational problem, not a memory feature.
-
-## Core idea
-
-Keep one canonical project context outside the conversation.
-
-A minimal implementation looks like this:
-
-```text
-project-context/
-├─ 00_Master_Context/
-│  └─ README_FIRST.md
-├─ 01_Domain_A/
-│  └─ CURRENT_STATE.md
-└─ 02_Domain_B/
-   └─ CURRENT_STATE.md
-```
-
-The three operator commands are:
-
-- **REHYDRATE** — load canonical context before substantial work.
-- **STATUS** — report the current safe state, unresolved items, and exact next action.
-- **CHECKPOINT** — persist a verified milestone back into canonical context.
-
-## What makes it different
-
-Project Rehydrate is not just a handoff note. It introduces explicit operating rules:
-
-- a source-of-truth hierarchy;
-- exact safe-state language;
-- atomic next actions;
-- explicit risk boundaries;
-- stale-instruction supersession;
-- backup-before-mutation;
-- small verified checkpoint writes;
-- read-back validation;
-- integrity hashing after semantic verification;
-- recovery procedures when continuity has already broken.
-
-## Design principles
-
-1. External state beats conversational memory.
-2. Canonical truth must be human-readable.
-3. Every handoff needs an exact safe state.
-4. Every checkpoint needs an exact next action.
-5. Back up before mutation.
-6. Write checkpoints in small verifiable chunks.
-7. Supersede stale instructions explicitly.
-8. Separate project domains so one workstream does not contaminate another.
-9. Treat AI memory as helpful context, never as the sole source of truth.
-10. Human verification remains mandatory before destructive or production changes.
-
-## Who this is for
-
-Project Rehydrate is intended for any long-running AI-assisted IT or technical work where continuity matters, including:
-
-- systems administration;
-- infrastructure and networking;
-- cybersecurity;
-- cloud operations;
-- databases;
-- data and analytics;
-- software development;
-- ERP and business systems;
-- reporting and BI;
-- IT governance;
-- incident response;
-- architecture;
-- technical support;
-- research and troubleshooting.
-
-## Start here
-
-- [Quickstart](QUICKSTART.md) — smallest useful implementation
-- [Protocol](PROTOCOL.md) — operating contract
-- [Reference Card](REFERENCE_CARD.md) — short day-to-day version
-- [Checkpointing](CHECKPOINTING.md) — verified persistence workflow
-- [Failure Modes](FAILURE_MODES.md) — how continuity breaks
-- [Field Notes and Growing Pains](FIELD_NOTES_AND_GROWING_PAINS.md) — how the protocol evolved from real failures
-- [Recovery Playbook](RECOVERY_PLAYBOOK.md) — what to do when it already broke
-- [Adoption Guide](ADOPTION_GUIDE.md) — introduce the pattern without creating bureaucracy
-- [AI Platform Compatibility](COMPATIBILITY.md) — how to adapt the protocol across different assistants
-- [Prompt Patterns](PROMPT_PATTERNS.md) — reusable model-neutral prompt examples
-- [FAQ](FAQ.md) — common questions
-- [Examples](examples/) — sanitized sample context files
-- [Roadmap](ROADMAP.md) — planned evolution
-- [Governance](GOVERNANCE.md) — how the protocol itself changes
-- [Security & Privacy](SECURITY.md) — information-hygiene guidance
-- [Contributing](CONTRIBUTING.md) — how to help
-
-## Thirty-second version
-
-At the end of a meaningful work session, do not write only what you did.
-
-Record:
+At the end of meaningful work, record:
 
 ```text
 Last verified milestone:
@@ -127,52 +22,100 @@ Do not do yet:
 
 At the start of the next session, reload that state before doing substantial work.
 
-That simple discipline is the seed of Project Rehydrate.
+Three commands make the workflow memorable:
 
-## Example
+- **REHYDRATE** — reload canonical project state.
+- **STATUS** — show where the project safely stands.
+- **CHECKPOINT** — persist the latest verified milestone.
 
-Instead of:
+## The flow
 
-> Worked on ingestion. Continue tomorrow.
+```mermaid
+flowchart LR
+    A[Work with AI] --> B[Checkpoint verified state]
+    B --> C[Canonical project context]
+    C --> D[New chat / new day / new assistant]
+    D --> E[REHYDRATE]
+    E --> F[Resume from exact safe state]
+    F --> A
+```
 
-write:
+## Why this exists
 
-> Read-only source inspection complete. Candidate incremental key validated over three historical windows. No production changes made. Scheduler remains disabled. Next action: run duplicate-key analysis before implementing merge logic.
+Without an external continuity layer, long AI-assisted work tends to drift:
 
-The second note survives a new chat, a tired operator, a different assistant, and a week away from the project.
+- old instructions survive after plans change;
+- temporary working files outrun the notes;
+- multiple workstreams get mixed together;
+- assistants reconstruct plausible history instead of loading verified state;
+- giant handoff summaries become hard to audit;
+- a successful command gets mistaken for a successful outcome.
 
-## What this is not
+Project Rehydrate grew out of those failures. The painful parts are documented in [Field Notes and Growing Pains](FIELD_NOTES_AND_GROWING_PAINS.md).
 
-Project Rehydrate does **not** replace:
+## Try it in 5 minutes
 
-- Git;
-- tickets;
-- runbooks;
-- architecture documentation;
-- backups;
-- secrets management;
-- technical judgment.
+Go straight to **[5_MINUTE_START.md](5_MINUTE_START.md)**.
 
-It is a continuity layer between those systems and the AI-assisted work happening around them.
+You only need:
+
+1. one master context file;
+2. one current-state file;
+3. REHYDRATE / STATUS / CHECKPOINT;
+4. the discipline to record an exact safe state and exact next action.
+
+## Who this is for
+
+Anyone doing long-running AI-assisted IT or technical work, including:
+
+- systems administration, infrastructure, networking;
+- cybersecurity and incident response;
+- cloud, databases, data, BI and analytics;
+- software and automation;
+- ERP and business systems;
+- IT governance, architecture and support;
+- technical research and troubleshooting.
+
+## Start simple, go deeper only when needed
+
+- [5 Minute Start](5_MINUTE_START.md) — use the pattern immediately
+- [Quickstart](QUICKSTART.md) — small practical implementation
+- [Reference Card](REFERENCE_CARD.md) — day-to-day cheat sheet
+- [Protocol](PROTOCOL.md) — full operating model
+- [Checkpointing](CHECKPOINTING.md) — verified write workflow
+- [Failure Modes](FAILURE_MODES.md) — common ways continuity breaks
+- [Growing Pains](FIELD_NOTES_AND_GROWING_PAINS.md) — how the protocol evolved
+- [Recovery Playbook](RECOVERY_PLAYBOOK.md) — recover after drift or partial failure
+- [AI Platform Compatibility](COMPATIBILITY.md) — ChatGPT, Claude, Gemini, Copilot, local models and more
+- [Prompt Patterns](PROMPT_PATTERNS.md) — reusable prompts
+- [Adoption Guide](ADOPTION_GUIDE.md) — use it without creating bureaucracy
+- [FAQ](FAQ.md) — common questions
+
+Advanced / project-maintainer docs:
+
+- [Roadmap](ROADMAP.md)
+- [Governance](GOVERNANCE.md)
+- [Security & Privacy](SECURITY.md)
+- [Contributing](CONTRIBUTING.md)
+
+## What this does not replace
+
+Project Rehydrate does not replace Git, tickets, runbooks, architecture documentation, backups, secrets management, or technical judgment.
+
+It is the continuity layer between those systems and the AI-assisted work happening around them.
 
 ## Status
 
 **v0.1 preview**
 
-This protocol is intentionally being published early. It has been shaped by repeated real-world continuity failures and recoveries, but it should still be treated as a field-tested working pattern rather than a finished standard.
-
-Feedback, criticism, edge cases, and better patterns are welcome.
-
-## Article draft
-
-A long-form introduction is being prepared in [ARTICLE_DRAFT.md](ARTICLE_DRAFT.md).
+The protocol is intentionally being published early so practitioners can test it, break it, improve it, and contribute real failure cases.
 
 ## License
 
-Project Rehydrate is available under the [MIT License](LICENSE).
+[MIT](LICENSE)
 
-## Philosophy
+## Why publish it?
 
-The goal is practical usefulness.
+Many of us learned computing because strangers documented obscure fixes, posted scripts, and explained things they were never obligated to share.
 
-If this saves one IT professional or technical practitioner from reconstructing hours or days of lost context, it has done its job.
+This is one attempt to put something useful back into that commons.
