@@ -1,10 +1,10 @@
-# Project Rehydrate — Launch Copy
+# Project Rehydrate by Caelvrix — Launch Copy
 
 These are starting drafts for public launch. Adapt tone to each community rather than posting identical text everywhere.
 
 ## GitHub repository description
 
-Vendor-neutral continuity protocol for long-running AI-assisted IT and technical work.
+Project Rehydrate by Caelvrix — a vendor-neutral continuity protocol for long-running AI-assisted IT and technical work.
 
 ## Short launch blurb
 
@@ -24,7 +24,7 @@ New chats, long context windows, stale instructions, temporary files, mixed work
 
 So we started treating continuity itself as an engineering problem.
 
-The result is Project Rehydrate, a vendor-neutral protocol built around three commands:
+The result is Project Rehydrate by Caelvrix, a vendor-neutral protocol built around three commands:
 
 - REHYDRATE — reload canonical project state
 - STATUS — show where the project safely stands
@@ -46,7 +46,7 @@ One failure mode kept biting me in long AI-assisted technical work: the project 
 
 New sessions lost exact context, stale next-actions survived after plans changed, giant handoff summaries became hard to verify, and temporary working files sometimes outran the notes.
 
-We ended up building a simple external-state protocol around three commands:
+Under Caelvrix, we ended up building a simple external-state protocol around three commands:
 
 - REHYDRATE
 - STATUS
@@ -70,7 +70,7 @@ Project Rehydrate – continuity for long-running AI-assisted IT work
 
 I've been working on long-running technical projects with AI assistants and kept hitting the same problem: conversational continuity was less reliable than the project itself.
 
-Project Rehydrate is a small vendor-neutral protocol that externalizes state into human-readable files and uses three operations: REHYDRATE, STATUS, and CHECKPOINT.
+Project Rehydrate by Caelvrix is a small vendor-neutral protocol that externalizes state into human-readable files and uses three operations: REHYDRATE, STATUS, and CHECKPOINT.
 
 It focuses on exact safe state, atomic next actions, explicit risk boundaries, stale-instruction supersession, and verified checkpoint writes.
 
