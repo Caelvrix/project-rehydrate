@@ -1,6 +1,6 @@
 # Roadmap
 
-Project Rehydrate is being developed in public as a practical continuity protocol for long-running AI-assisted engineering work.
+Project Rehydrate is being developed in public as a practical continuity protocol for long-running AI-assisted IT and technical work.
 
 ## v0.1 — Foundation
 
