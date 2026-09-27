@@ -95,6 +95,7 @@ Anyone doing long-running AI-assisted IT or technical work, including:
 - [AI Platform Compatibility](COMPATIBILITY.md) — ChatGPT, Claude, Gemini, Copilot, local models and more
 - [Prompt Patterns](PROMPT_PATTERNS.md) — reusable prompts
 - [Adoption Guide](ADOPTION_GUIDE.md) — use it without creating bureaucracy
+- [Git-backed Continuity](GIT_BACKED_CONTINUITY.md) — optional private-repository integration, verified checkpoints and independent backups
 - [FAQ](FAQ.md) — common questions
 
 Advanced / project-maintainer docs:
