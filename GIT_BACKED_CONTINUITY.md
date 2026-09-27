@@ -32,6 +32,21 @@ Inspect → Validate → Back up → Change → Validate → Reconcile → Recor
 - Record the next safe action and update backup/recovery evidence. Never claim a checkpoint is complete when a write or readback failed.
 - Repository documentation updates do not authorize execution against production systems.
 
+## RECOVER — historical knowledge archaeology
+
+A fourth, complementary workflow can recover valuable engineering knowledge from old AI conversations. It is not a fourth prerequisite for everyday use of the three core commands.
+
+1. Select an old conversation or a bounded topic. Extract concrete commands, object names, decisions, test results, failures, lessons and source chronology into a provisional recovery record.
+2. Preserve provenance: source conversation/date, exact evidence where possible, extraction gaps, and whether each statement was observed, inferred or merely proposed.
+3. Compare the extraction with the latest canonical domain file and newer evidence. Historical facts do not automatically become current configuration; explicitly mark SUPERSEDED, HISTORICAL, PROVISIONAL or UNRESOLVED where appropriate.
+4. Have a human review material contradictions and sensitive details. Do not commit unredacted full chat dumps, credentials or confidential artifacts.
+5. Commit validated additions to the owning domain in small, reviewable changes, keeping the master map concise. Record the revision and verify readback.
+6. Preserve non-current archaeology in a clearly identified historical location when retention is approved. It must not silently override current truth.
+
+**Recovery is evidence reconciliation, not transcript ingestion.** A conversation may preserve the reasoning and observations behind a decision, but only validated evidence can advance operational current state.
+
+This supports device-independent collaboration: a connected assistant can read the same authenticated repository from different sessions without repeatedly pasting large context files. Actual cloud or infrastructure execution still requires separate authorization and environment access.
+
 ## Security and recovery boundaries
 
 Keep repositories private for organizational context; apply least privilege, organization approval, protected branches, MFA and access review. Do not commit credentials, keys, raw confidential exports or sensitive incident evidence. Scan candidates and nested archives before import; use a restrictive allowlist rather than uploading an entire unexamined ZIP. Git history retains mistakes even after a file is deleted; follow an incident response and history-cleaning process for exposed secrets. Test restoration from independent, versioned backups.
