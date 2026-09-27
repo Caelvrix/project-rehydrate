@@ -313,6 +313,24 @@ Project Rehydrate treats cleanup as a controlled operation:
 
 ---
 
+## 16. Historical conversations contained recoverable engineering knowledge
+
+Moving current state into a repository solved forward continuity, but older conversations still held useful details that had never been checkpointed: successful commands, rejected approaches, test evidence, decisions and lessons.
+
+### Lesson
+
+Historical chat is neither disposable nor automatically authoritative. It is an evidence source that needs provenance and reconciliation. Blindly importing entire transcripts would recreate context clutter and could promote stale instructions into current truth.
+
+### Change introduced
+
+We defined **RECOVER** as a complementary archaeology workflow: extract a bounded topic, preserve source/date and confidence, compare it with current domain truth, review conflicts, and commit only validated additions. Historical evidence stays labelled historical; current state advances only when supported.
+
+When paired with authenticated private Git access, this also reduces repeated file uploads and terminal dumps across sessions and devices. Repository access does not confer authority to execute changes in external systems.
+
+See [Git-backed Continuity](GIT_BACKED_CONTINUITY.md) for the pattern. This is an evolving field practice, not a claim that conversation recovery or Git-backed AI memory was invented here.
+
+---
+
 ## What these failures changed
 
 The current protocol is deliberately more cautious than our first attempts.
