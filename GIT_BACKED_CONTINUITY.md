@@ -54,3 +54,18 @@ Keep repositories private for organizational context; apply least privilege, org
 ## Evidence status
 
 This document describes a deployable pattern. A specific organization must separately validate connector permissions, initial import, rehydration, controlled checkpoint writes, backup scheduling and restoration before calling its migration complete.
+
+
+## Artifact-continuity rule (field lesson, September 2026)
+
+A checkpoint that names a script, notebook, model or other essential implementation artifact is **not recoverable** merely because Markdown records its old local path and hash. The artifact itself must be accessible from the canonical storage system (or an explicit, tested external artifact store) before the checkpoint is declared complete.
+
+For a Git-canonical deployment, keep approved source and sanitized, reviewable working artifacts in a private repository with the documentation that depends on them. Maintain an artifact manifest recording path/ref, content hash or object ID, classification (reference/WIP/validated/deployed), runtime environment and authorization status, and exact recovery instructions. Check sensitive or generated material against a restrictive allowlist before publication; do not commit secrets, raw business data, credentials, unreviewed exports or notebook outputs.
+
+At CHECKPOINT: commit the approved implementation and domain state together or as explicitly linked commits; independently fetch the committed artifact at the intended branch/ref and compare the retrieved content/hash, then update the master handoff with its actual status. A successful push, locally matching hash or descriptive checkpoint alone is insufficient. Do not imply local working folders and remote Git are synchronized without checking both.
+
+At REHYDRATE: fetch the README, relevant domain state **and referenced executable source artifacts** from the canonical ref; verify availability and integrity before planning execution. Prefer fetching directly from the authorized repository rather than asking the operator to locate/re-upload a file already present there. If a referenced artifact is absent, mark the workstream **BLOCKED: ARTIFACT NOT RECOVERED** instead of reconstructing from chat or silently treating documentation as implementation.
+
+An unfinished artifact may be committed privately as explicitly labeled WIP, with fail-closed defaults and deployment prohibitions; a source commit does not prove Fabric/cloud runtime validation or authorize a write. Never conflate source-recovered, syntactically checked, deployed, executed and independently reconciled.
+
+**Workflow-efficiency guard:** one action at a time applies at meaningful inspect/validate/mutate/reconcile boundaries. It does not mean repeatedly reading already verified source in arbitrary small excerpts or editing each constant separately. Construct a coherent reviewed change and expose one controlled operational step at a time. When a user intentionally migrates the canonical store to Git, legacy local copies are recovery evidence, not mandatory rehydration dependencies. Independent, versioned backup still remains necessary; Git commit history alone is not backup.
