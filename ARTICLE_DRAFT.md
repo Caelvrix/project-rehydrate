@@ -84,7 +84,7 @@ A practical Git-backed workflow now looks like this:
 
 1. **Work in small verified stages.** Inspect, validate, change, reconcile.
 2. **Checkpoint meaningful proof as it happens.** Do not wait for the user to remember to ask.
-3. **Keep a compact master/router plus a deeper continuity record.** The router tells a new session where to look; the deeper record preserves operational evidence, exact IDs, hashes, failures and safe stopping points.
+3. **Keep a compact latest-checkpoint surface plus a deeper continuity record.** A small file such as `LATEST_CHECKPOINT.md` tells a new session exactly where to resume; the deeper record preserves operational evidence, exact IDs, hashes, failures and historical safe stopping points.
 4. **Commit small, reviewable chunks.** Avoid one giant context write that can fail, truncate or trigger connector/tool limits.
 5. **Verify every write.** Capture the commit SHA or revision and read back when practical.
 6. **If the write is blocked or fails, say so explicitly.** Never claim continuity is safe when the canonical write did not land.
@@ -92,6 +92,26 @@ A practical Git-backed workflow now looks like this:
 8. **Resume from the last verified state, not the last conversational sentence.**
 
 In our own use this has been dramatically more reliable than the earlier end-of-session handoff model. An informal field estimate puts successful continuity recovery around **90% in the scenarios we have exercised**, but that is an experience report, not a controlled benchmark. The remaining failures are exactly why the protocol still requires verification and explicit failure handling.
+
+## State is not enough: preserve the artifacts too
+
+A continuity note can perfectly describe a script, report definition, notebook or model that still exists only on one workstation. That is documentation, not full recovery.
+
+We now treat a checkpoint as incomplete for implementation work until the required artifact bytes are also recoverable from the canonical repository or another approved artifact store.
+
+That introduced another subtle lesson: **a successful Git add is not proof that Git stored the same bytes you validated locally.** Text normalization, filters or line-ending conversion can change staged content.
+
+For critical artifacts, our current pattern is:
+
+1. copy only the approved recovery artifacts into a bounded canonical folder;
+2. record expected hashes;
+3. apply repository rules needed to preserve their bytes;
+4. compare the working-tree object with the staged Git object before commit;
+5. commit and push;
+6. verify the remote revision;
+7. only then mark the artifact as recoverable from Git.
+
+The broader principle is the same one that shaped the rest of Project Rehydrate: **verify the state you actually persisted, not the state you intended to persist.**
 
 ## What a checkpoint actually looks like
 
