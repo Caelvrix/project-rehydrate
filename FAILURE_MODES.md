@@ -93,3 +93,27 @@ Project Rehydrate was shaped by failures, not by theory.
 **Symptom:** The context file grows until important state is buried.
 
 **Mitigation:** Use master routing, domain separation, concise current-state sections, milestone history, and periodic cleanup with backups.
+
+## 13. Waiting until the chat is dying to checkpoint
+
+**Symptom:** The operator asks for continuity only after a context-limit warning, browser failure or forced move to a new conversation.
+
+**Risk:** The final checkpoint depends on the exact session that is already failing.
+
+**Mitigation:** Checkpoint substantial verified milestones continuously. Treat an explicit CHECKPOINT command as a hard stopping-point snapshot, not the only time continuity is written.
+
+## 14. Repository write blocked at the worst moment
+
+**Symptom:** The preferred Git connector rejects, blocks, conflicts or rate-limits a checkpoint write.
+
+**Risk:** Verified state remains trapped in active chat context even though the project is otherwise Git-canonical.
+
+**Mitigation:** Never claim success when the write did not land. Retry a smaller bounded change after refreshing the target revision; retain an approved manual Git fallback; and keep a compact latest-checkpoint surface so recovery does not depend on rewriting a large forensic log.
+
+## 15. Rehydrating from the default branch by assumption
+
+**Symptom:** A fresh session opens the repository README on the default branch and assumes it represents the active workstream.
+
+**Risk:** The assistant can load a valid but stale state while a newer verified checkpoint exists on an active feature/review branch.
+
+**Mitigation:** Use branch-first discovery: enumerate plausible active branches, inspect recent relevant commits, match the workstream/date, verify branch HEAD/checkpoint revision, then read current-state files from that ref.
