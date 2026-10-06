@@ -12,7 +12,9 @@ That became **Project Rehydrate**, published by **Caelvrix**.
 
 ## The idea in one paragraph
 
-Project Rehydrate keeps a small external source of truth for long-running AI-assisted IT work. At the end of meaningful work, you record the last verified milestone, current safe state, unresolved items, exact next action, and what must not be changed yet. At the start of the next session, the AI reloads that canonical state before continuing.
+Project Rehydrate keeps a small external source of truth for long-running AI-assisted IT work. During meaningful work, verified milestones are checkpointed continuously into an external canonical store rather than waiting for the end of the conversation. Each checkpoint records the last verified milestone, current safe state, unresolved items, exact next action, and what must not be changed yet. At the start of a new session, the AI discovers the active branch and latest relevant checkpoint first, then reloads canonical project state before continuing.
+
+The important shift is simple: **do not make the dying chat responsible for saving itself.**
 
 Three commands make the workflow memorable:
 
@@ -21,6 +23,8 @@ Three commands make the workflow memorable:
 - **CHECKPOINT** — persist the latest verified milestone.
 
 That is the core protocol.
+
+In our current field implementation, CHECKPOINT is no longer only a user-issued command. The operator can still say CHECKPOINT to force a hard stopping-point snapshot, but the assistant also records substantial verified milestones as work progresses. This reduces the amount of state that can be lost when a conversation ends unexpectedly.
 
 ## Why the name?
 
@@ -50,6 +54,8 @@ Project Rehydrate did not appear fully formed.
 
 We tried large handoff summaries. They became hard to audit.
 
+We also learned not to wait until a chat is nearly full before saving state. In one real session, the interface warned that the conversation was full and allowed only one final message. Because verified milestones had already been committed incrementally, that last message only needed to request a checkpoint instead of reconstructing hours of work.
+
 We left old next-actions in context. They survived after strategy changed.
 
 We let several workstreams share too much continuity state. They started bleeding into each other.
@@ -67,6 +73,25 @@ And we saw how easily an AI assistant could fill gaps with a plausible history w
 Each failure hardened the protocol.
 
 The full list is documented in `FIELD_NOTES_AND_GROWING_PAINS.md` because we think the mistakes are as useful as the final framework.
+
+## The newer field-tested pattern
+
+The first version of Project Rehydrate assumed that a checkpoint would usually happen near the end of a work session. That was better than relying on chat history, but still left an obvious weakness: the conversation could fail before the checkpoint happened.
+
+The newer pattern treats continuity as a **running transaction log of verified milestones**.
+
+A practical Git-backed workflow now looks like this:
+
+1. **Work in small verified stages.** Inspect, validate, change, reconcile.
+2. **Checkpoint meaningful proof as it happens.** Do not wait for the user to remember to ask.
+3. **Keep a compact master/router plus a deeper continuity record.** The router tells a new session where to look; the deeper record preserves operational evidence, exact IDs, hashes, failures and safe stopping points.
+4. **Commit small, reviewable chunks.** Avoid one giant context write that can fail, truncate or trigger connector/tool limits.
+5. **Verify every write.** Capture the commit SHA or revision and read back when practical.
+6. **If the write is blocked or fails, say so explicitly.** Never claim continuity is safe when the canonical write did not land.
+7. **At REHYDRATE, discover before reading.** Identify repository, enumerate likely active branches, inspect recent relevant commits, then read the checkpoint/current-state files at the winning branch/ref.
+8. **Resume from the last verified state, not the last conversational sentence.**
+
+In our own use this has been dramatically more reliable than the earlier end-of-session handoff model. An informal field estimate puts successful continuity recovery around **90% in the scenarios we have exercised**, but that is an experience report, not a controlled benchmark. The remaining failures are exactly why the protocol still requires verification and explicit failure handling.
 
 ## What a checkpoint actually looks like
 
@@ -99,7 +124,10 @@ The protocol intentionally favors boring things:
 - explicit supersession of stale directions;
 - backup before mutation;
 - small checkpoint writes;
-- read-back verification;
+- continuous milestone checkpointing rather than end-of-chat rescue;
+- branch-first rehydration;
+- commit/read-back verification;
+- explicit reporting when a checkpoint write fails;
 - hashes only after semantic verification.
 
 Boring state is easier to inspect, diff, correct, and trust.
