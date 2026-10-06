@@ -11,12 +11,17 @@ Project Rehydrate is storage-agnostic. A private Git repository can serve as the
 
 ## REHYDRATE
 
-1. Identify the active workstream from the user's request; use the master README as the routing map.
-2. Retrieve the canonical README at a known repository and revision.
-3. Fetch only the relevant domain current-state files and required dependencies.
-4. Reconcile the latest verified checkpoint against any newer evidence and distinguish CURRENT, PROVISIONAL and UNRESOLVED state.
-5. Report the last verified milestone, safe state, blockers, and exactly one next action. No changes during rehydration.
-6. If repository access is unavailable, fall back to direct attachment of canonical Markdown files. Avoid giant terminal dumps.
+Use a **branch-first discovery sequence**. Do not assume the default branch or ask the operator to paste a checkpoint until repository discovery has failed.
+
+1. Identify the repository and active workstream from the user's request.
+2. Enumerate plausible active branches and inspect recent relevant commits.
+3. Match the workstream, date and latest verified checkpoint to the most likely canonical branch/ref.
+4. Retrieve the master README/router and the workstream current-state/checkpoint files from that branch.
+5. Verify the branch HEAD and checkpoint revision before treating the recovered state as canonical.
+6. Fetch only relevant dependencies and referenced implementation artifacts needed to continue safely.
+7. Reconcile the latest verified checkpoint against newer evidence and distinguish CURRENT, PROVISIONAL and UNRESOLVED state.
+8. Report the branch/ref, checkpoint revision, last verified milestone, safe state, blockers and exactly one next action. No operational mutation during rehydration.
+9. If repository access is unavailable or discovery cannot establish a trustworthy ref, fall back to direct attachment of canonical files. Avoid giant terminal dumps and do not reconstruct missing operational history from chat.
 
 ## STATUS
 
@@ -26,10 +31,15 @@ Report the verified workstream state, blockers and next action, citing exact fil
 
 Inspect → Validate → Back up → Change → Validate → Reconcile → Record.
 
+CHECKPOINT is both an explicit operator command and a **continuous continuity discipline**. The operator may issue CHECKPOINT to force a hard stopping-point snapshot, but assistants should also record substantial verified milestones during long work rather than waiting for the end of the chat.
+
 - Before writing, read the latest target file and revision; detect concurrent edits rather than overwrite them.
-- Change domain truth and the compact master quest log together. Use a branch/PR where review is warranted.
-- Make small, bounded edits. Verify the resulting content and commit SHA by readback.
-- Record the next safe action and update backup/recovery evidence. Never claim a checkpoint is complete when a write or readback failed.
+- Change domain truth and the compact master quest log together where practical. Use a branch/PR where review is warranted.
+- Make small, bounded commits rather than one giant context write.
+- Verify the resulting content and commit SHA by readback.
+- Record exact evidence that materially matters for recovery: branch/ref, operation IDs, hashes, validation results, failure states, untouched boundaries and the next safe action.
+- Never claim a checkpoint is complete when a write or readback failed.
+- If a repository connector blocks or rejects a write, keep the verified state in active context, report the failure explicitly, retry with a smaller bounded change when appropriate, and preserve a manual/local Git fallback path. Do not silently substitute an unverified checkpoint.
 - Repository documentation updates do not authorize execution against production systems.
 
 ## RECOVER — historical knowledge archaeology
@@ -69,3 +79,19 @@ At REHYDRATE: fetch the README, relevant domain state **and referenced executabl
 An unfinished artifact may be committed privately as explicitly labeled WIP, with fail-closed defaults and deployment prohibitions; a source commit does not prove Fabric/cloud runtime validation or authorize a write. Never conflate source-recovered, syntactically checked, deployed, executed and independently reconciled.
 
 **Workflow-efficiency guard:** one action at a time applies at meaningful inspect/validate/mutate/reconcile boundaries. It does not mean repeatedly reading already verified source in arbitrary small excerpts or editing each constant separately. Construct a coherent reviewed change and expose one controlled operational step at a time. When a user intentionally migrates the canonical store to Git, legacy local copies are recovery evidence, not mandatory rehydration dependencies. Independent, versioned backup still remains necessary; Git commit history alone is not backup.
+
+
+## Write-failure resilience
+
+Git-backed continuity needs a second path for the moments when the preferred repository connector refuses, rate-limits, conflicts or blocks a write.
+
+Recommended resilience ladder:
+
+1. **Retry smaller.** Split a large append into one verified milestone per commit.
+2. **Refresh before retry.** Re-read the target file/ref and use the newest blob/revision to avoid stale-write conflicts.
+3. **Write the owning domain first.** If a mega continuity file is large or repeatedly blocked, commit the smallest authoritative current-state file before attempting the larger forensic log.
+4. **Use normal Git as the manual fallback.** A local clone with authenticated `git add`, `git commit`, `git push` can preserve continuity when an AI connector cannot perform the write. The same verification rules still apply.
+5. **Maintain a compact emergency checkpoint surface.** A small file such as `LATEST_CHECKPOINT.md` can record branch/ref, last verified milestone, safe state, next action and links to deeper evidence. This reduces dependence on repeatedly rewriting a very large continuity file.
+6. **Reconcile later.** Once the preferred write path is healthy, fold the emergency checkpoint into the normal domain/mega history and mark it reconciled.
+
+The goal is not to make writes infallible. The goal is to ensure **one blocked write cannot make the whole project continuity-dependent on the chat window again**.
